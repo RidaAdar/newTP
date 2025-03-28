@@ -11,6 +11,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
+# modele 2
+def my_model():
+    pass
+
+
 # Fonction new_model corrigée
 def new_model():
     pass
