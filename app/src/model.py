@@ -20,6 +20,10 @@ def my_model():
 def new_model():
     pass
 
+# nouveau model 
+def new_model3():
+    pass
+
 
 def train_model(
     df: pd.DataFrame,
