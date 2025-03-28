@@ -16,8 +16,6 @@ def main():
     # Charger les données
     df = load_data()
     
-    # Introduire un bug à corriger par Tarek
-    bug1 = 1/0
 
 
     # Navigation
