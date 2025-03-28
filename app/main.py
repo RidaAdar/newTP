@@ -5,6 +5,9 @@ from src.model import predict, train_model
 from src.utils import setup_logging
 
 
+
+
+
 def main():
     logger.info("Démarrage de l'application")
     setup_logging()  # Configurer les logs
@@ -13,6 +16,10 @@ def main():
     # Charger les données
     df = load_data()
     
+    # Introduire un bug à corriger par Tarek
+    bug1 = 1/0
+
+
     # Navigation
     st.sidebar.title("Navigation")
     choice = st.sidebar.radio("Choisissez une section", ["EDA", "Entraînement du Modèle", "Prédiction"])
