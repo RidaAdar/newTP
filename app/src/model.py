@@ -11,6 +11,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
+# Fonction new_model avec Division Error à corriger par Dorival
+def new_model():
+    return 1/0
+
+
 def train_model(
     df: pd.DataFrame,
 ) -> Tuple[
