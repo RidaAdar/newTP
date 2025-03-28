@@ -114,6 +114,9 @@ def train_model(
 
     return model, scaler, label_encoder
 
+#Fonctionnalité: Test_Tarek pour le commit
+def new_graphe():
+    pass
 
 def predict(model: Any, scaler: Any, label_encoder: Any) -> None:
     """
