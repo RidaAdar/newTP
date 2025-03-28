@@ -1,3 +1,50 @@
-/logs
-.venv
-.vscode
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Fichiers de logs
+*.log
+
+# Fichiers temporaires
+*.tmp
+*.swp
+
+# Dossiers de build
+build/
+dist/
+
+# Caches
+.cache/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Environnements virtuels
+.env
+.venv/
+venv/
+env/
+
+# Fichiers secrets
+*.key
+*.pem
+
+# Docker
+.docker/
+docker-compose.override.yml
+Dockerfile~
+*.tar
+*.tar.gz
+
+# Streamlit
+.streamlit/config.toml
+
+# IDEs / éditeurs
+.vscode/
+.idea/
+
+# Système (Windows / Mac)
+.DS_Store
+Thumbs.db
+
