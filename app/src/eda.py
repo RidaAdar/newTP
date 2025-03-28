@@ -5,6 +5,17 @@ import streamlit as st
 from loguru import logger
 
 
+#µµµµµµµµµµµµµµµµµµµ  Dorival µµµµµµµµµµµµµµµµµµµµµµµµ
+
+# Fonctionnalité generate_dashboard
+def generate_dashboard():
+    """
+    Fonction à implémenter : génération d’un tableau de bord interactif.
+    """
+    pass
+
+
+
 # Dictionnaire pour mapper les noms de colonnes aux descriptions complètes
 column_descriptions = {
     "age": "Âge (numérique)",
