@@ -18,6 +18,7 @@ def main():
     
 
 
+
     # Navigation
     st.sidebar.title("Navigation")
     choice = st.sidebar.radio("Choisissez une section", ["EDA", "Entraînement du Modèle", "Prédiction"])
