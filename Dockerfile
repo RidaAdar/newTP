@@ -4,6 +4,9 @@ FROM python:3.11-slim
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
+#Test function : cherry-pick test
+def goat():
+    pass
 # Copier le fichier des dépendances
 COPY requirements.txt .
 
