@@ -53,8 +53,11 @@ Puis, la configuration a été vérifiée avec :
 ```bash
 git config --list
 ```
+
 📸 **Capture d'écran 2 (Affichage de la configuration Git)**  
-👉 ![Affichage de la configuration Git](img/git-config.png)
+
+![Affichage de la configuration Git](git-config-list.png)
+
 
 * **1.3. Initialisation du nouveau dépôt distant**
 
@@ -65,7 +68,7 @@ git remote remove origin
 git remote add origin https://github.com/<username>/<new-repo>.git
 ```
 📸 **Capture d'écran 3 (Changement de dépôt distant avec `git remote`)**  
-👉 ![Changement de dépôt distant](img/git-remote-set.png)
+👉 ![Changement de dépôt distant](git-remote.png)
 
 ## Tâche 2 : Configuration avancée du fichier `.gitignore`
  
@@ -75,60 +78,9 @@ Un fichier `.gitignore` a été créé et configuré pour ignorer les fichiers e
  
 > Voici les principales entrées ajoutées :
 
- ```gitignore
 
- # Python bytecode
- __pycache__/
- *.py[cod]
- *.pyo
- 
- # Fichiers de logs
- *.log
- 
- # Fichiers temporaires
- *.tmp
- *.swp
- 
- # Dossiers de build
- build/
- dist/
- 
- # Caches
- .cache/
- *.egg-info/
- .eggs/
- pip-wheel-metadata/
- 
- # Environnements virtuels
- .env
- .venv/
- venv/
- env/
- 
- # Fichiers secrets
- *.key
- *.pem
- 
- # Docker
- .docker/
- docker-compose.override.yml
- Dockerfile~
- *.tar
- *.tar.gz
- 
- # Streamlit
- .streamlit/config.toml
- 
- # IDEs / éditeurs
- .vscode/
- .idea/
- 
- # Système (Windows / Mac)
- .DS_Store
- Thumbs.db
- ```
 📸 **Capture d'écran 4 (Édition du fichier .gitignore dans l'éditeur)**  
-👉 ![Édition du fichier .gitignore](img/edit-gitignore.png)
+👉 ![Édition du fichier .gitignore](screen-gitignore.png)
 
 * **2.2 Vérification des fichiers ignorés :**
  
@@ -138,13 +90,13 @@ La commande suivante a été utilisée pour vérifier que les fichiers définis 
 git status
 ```
 📸 **Capture d'écran 5 (`git status` montrant que les fichiers sont ignorés)**  
-👉 ![git status montrant que les fichiers sont ignorés](img/git-status-gitignore.png)
+👉 ![git status montrant que les fichiers sont ignorés](git_status.png)
  
- > **Commentaires :**
- 
-   - Les fichiers comme `.log`, `.pyc`, ou les dossiers comme `.venv/`, `build/`, `.vscode/` sont correctement exclus.
+💬 **Commentaires :**
 
-   - Cela permet de garder un historique propre et de ne pas polluer le dépôt avec des fichiers générés automatiquement.
+- ✅ Les fichiers temporaires et d’environnement (`.log`, `.pyc`, `.venv/`, `build/`, etc.) sont bien ignorés grâce au `.gitignore`.
+- 🖼️ Les fichiers `.png` sont des **captures d’écran prévues pour le rapport** : ils ne sont pas ignorés et seront commités volontairement.
+- 📌 Le statut affiché est donc **normal et maîtrisé**.
 
  
 ## Tâche 3 : Mise en place d’un workflow de développement collaboratif
