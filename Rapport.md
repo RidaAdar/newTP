@@ -99,72 +99,177 @@ git status
 - 📌 Le statut affiché est donc **normal et maîtrisé**.
 
  
-## Tâche 3 : Mise en place d’un workflow de développement collaboratif
+# Tâche 3 : Mise en place d’un workflow de développement collaboratif
+## 3.1 Mise en place d’un ruleset de protection sur la branche `master`
+
+La protection de la branche `master` est essentielle pour garantir la stabilité du projet. Voici les étapes effectuées pour configurer un ruleset dans GitHub :
+
+---
+
+### ✅ Étape 1 : Création du ruleset
+
+📸 **Capture d'écran 1 – Création du ruleset `rule1`**  
+👉 ![Création du ruleset](cap1.png)
+
+- Un ruleset nommé `rule1` a été créé via le bouton **"New ruleset"** dans l'onglet `Rulesets`.
+- Ce ruleset regroupera l’ensemble des règles de protection applicables à une ou plusieurs branches.
+
+---
+
+### 🎯 Étape 2 : Ciblage de la branche `master`
+
+📸 **Capture d'écran 2 – Ciblage de la branche `master` dans les paramètres du ruleset**  
+👉 ![Ciblage de la branche master](cap2.png)
+
+- Dans la section **Targets**, la branche `master` a été spécifiée comme cible.
+- Cela signifie que toutes les règles définies s’appliqueront uniquement à cette branche.
+
+---
+
+### 🔐 Étape 3 : Activation des restrictions de merge
+
+📸 **Capture d'écran 3 – Activation de la protection via Pull Request obligatoire**  
+👉 ![Pull Request obligatoire](cap3.png)
+
+- L’option **"Require a pull request before merging"** a été cochée.
+- Cela **empêche tout push direct** sur `master` : les changements doivent passer par une **Pull Request**.
+- De plus, **au moins 1 approbation est exigée** pour fusionner la PR.
+
+---
+
+💬 **Commentaires :**
+
+- Cette configuration assure que **chaque contribution est relue et validée** avant d’être intégrée à la branche principale.
+- Cela permet de maintenir un code propre, sécurisé, et validé collectivement.
+- Utile dans tout workflow collaboratif en équipe.
+
   
-* **3.1 Création de branches thématiques :**
- 
-Pour organiser le développement collaboratif, plusieurs branches ont été créées, chacune associée à une fonctionnalité ou une correction spécifique :
- 
+
+## 3.2 Création et utilisation des branches thématiques
+
+Pour organiser le développement collaboratif, plusieurs branches ont été créées, chacune correspondant à une fonctionnalité ou une correction spécifique :
+
 - `feature/generate_dashboard`
-
 - `feature/new_graph`
-
+- `feature/new_model`
 - `bugfix/division-error`
- 
+
 La commande utilisée pour créer une branche thématique est :
- 
+
 ```bash
-git checkout -b feature/generate_dashboard
+git checkout -b feature/new_model
 ```
 
+📸 **Capture d'écran – Aller dans la branche feature/new_modeldéja créé"
+👉  
+![Switcher vers la branche](cap4.png)
 
-📸 **Capture d'écran 6 (Création d'une branche locale avec `git checkout -b`)**  
 
-👉 ![Création d'une branche locale avec git checkout -b](img/create-branch.png)
 
- 
-* **3.2 Développement et commits :**
- 
-Sur chaque branche, les modifications sont suivies de commits explicites, en utilisant une sémantique standard :
- 
+📸 **Capture d'écran – Ouverture du fichier `model1.py` dans VS Code**  
+👉  
+![Ouverture du fichier model1.py](cap5_prime.png)
+
+---
+
+## ➕ Étape 4– Ajout des modifications dans l’index Git
+
+### 💻 Commande utilisée :
 ```bash
-git commit -m "feat: ajout du dashboard interactif"
+git add app/src/model1.py
 ```
- 
-**Convention de nommage des messages de commit**
- 
-- `feat:` → ajout d'une nouvelle fonctionnalité
+📸 **Capture d'écran – Ajout du fichier modifié au staging area**  
+👉  
+![Ajout au staging area](cap5.png)
 
-- `fix:` → correction d’un bug
+---
 
-- `BREAKING CHANGE:` → changement majeur pouvant casser la compatibilité
+## 📝 Étape 5 – Commit avec un message sémantique
 
-- `perf:` → amélioration des performances sans changement fonctionnel
+### 💻 Commande utilisée :
+```bash
+git commit -m "feat: ajout d'un nouveau modele model1()"
+```
+📸 **Capture d'écran – Commit structuré avec `feat:`**  
+👉  
+![Commit structuré avec feat](cap5.png)
 
-📸 **Capture d'écran 7 (Commit structuré sur la branche `feature/new_graph`)**  
-👉 ![Commit structuré sur la branche feature/new_graph](img/feature-commit.png)
+---
 
-* **3.3 Pull Requests et Revue de code**
- 
-Une fois le développement terminé, une Pull Request (PR) est créée depuis GitHub pour proposer l’intégration des changements dans la branche `main`.
- 
-📸 **Capture d'écran 8 (Création d’une Pull Request sur GitHub)**  
+📸 **Capture d'écran – git pull — Synchroniser sa branche avec le dépôt distant**
+👉  
+![git pull](cap6.png)
 
-👉 ![Création d’une Pull Request sur GitHub](img/create-pull-request.png)
- 
-Les coéquipiers sont invités à commenter, relire, et approuver les modifications. En cas de conflit, GitHub alerte, et une résolution manuelle peut être nécessaire avant merge.
- 
-> **Commentaires :**
- 
-  - Le système de PR permet un contrôle qualité collaboratif avant d’intégrer une fonctionnalité.
 
-  - Chaque branche reste isolée, ce qui évite les effets de bord sur `main`.
- 
-📸 **Capture d'écran 9 (Discussion et validation d’une Pull Request)**  
 
-👉 ![Discussion et validation d’une Pull Request](img/validate-pr.png)
+## 🚀 Étape 6 – Envoi de la branche sur le dépôt distant
 
- 
+### 💻 Commande utilisée :
+```bash
+git push -u origin feature/new_model
+```
+📸 **Capture d'écran – Push de la branche vers GitHub**  
+👉  
+![Push branche vers GitHub](cap7.png)
+
+---
+
+## 🏷️ Convention de nommage des messages de commit
+
+| Préfixe         | Description                                                             |
+|------------------|-------------------------------------------------------------------------|
+| `feat:`          | ➕ Ajout d'une **nouvelle fonctionnalité**                              |
+| `fix:`           | 🐛 Correction d’un **bug**                                              |
+| `BREAKING CHANGE:` | 💥 Changement **majeur** cassant la compatibilité                   |
+| `perf:`          | 🚀 Amélioration des **performances** sans changement fonctionnel        |
+
+```bash
+git commit -m "fix: correction division par zéro dans la fonction main"
+```
+## 3.3 - Intégration via Pull Requests
+
+## 📌 Étapes de revue et fusion d'une Pull Request sur GitHub
+
+### 🟡 Étape 7 : Détection de changements sur la branche
+📸 **Capture d'écran 1 (Compare & pull request)**  
+👉 ![Compare & pull request](cap8.png)
+
+> GitHub détecte que la branche `feature/new_model` a des changements récents. Un bouton "Compare & pull request" est proposé pour initier une PR vers `main`.
+
+---
+
+### 📝 Étape 8 : Création de la Pull Request
+📸 **Capture d'écran 2 (Création de la PR et état initial)**  
+👉 ![Création PR](cap9.png)
+> L'auteur décrit les modifications apportées.  
+> Des checks automatiques sont en cours (CI Docker) et une revue humaine est requise.  
+> L’option "Merge pull request" est bloquée tant que ces conditions ne sont pas remplies.
+
+---
+
+### ✅ Étape 9 : Revue par un coéquipier
+📸 **Capture d'écran 3 (Review de la Pull Request)**  
+👉 ![Review PR](cap10.png)
+> Le coéquipier Tarek valide la PR avec un message d'approbation. Il peut cliquer sur "Approve" et soumettre la revue.
+
+---
+
+### ✅ Étape 10: Vérification automatique des checks
+📸 **Capture d'écran 4 (Checks et validation automatique)**  
+👉 ![Checks ok](cap11.png)
+👉 ![Checks ok](cap12.png)
+> Tous les tests sont passés (Docker CI), et il n’y a pas de conflits avec la branche principale.  
+> Le bouton "Merge pull request" devient actif.
+
+---
+
+### 🟢 Étape 11: Fusion et clôture
+📸 **Capture d'écran 5 (Fusion réussie)**  
+👉 ![PR fusionnée](cap13.png)
+> La PR est fusionnée avec succès dans la branche `main`. GitHub propose de supprimer la branche `feature/new_model` devenue obsolète.
+
+---
+
 ## Tâche 4 : Utilisation et gestion des tags Git
  
 ---
