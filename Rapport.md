@@ -99,145 +99,340 @@ git status
 - 📌 Le statut affiché est donc **normal et maîtrisé**.
 
  
-## Tâche 3 : Mise en place d’un workflow de développement collaboratif
+# Tâche 3 : Mise en place d’un workflow de développement collaboratif
+## 3.1 Mise en place d’un ruleset de protection sur la branche `master`
+
+La protection de la branche `master` est essentielle pour garantir la stabilité du projet. Voici les étapes effectuées pour configurer un ruleset dans GitHub :
+
+---
+
+### ✅ Étape 1 : Création du ruleset
+
+📸 **Capture d'écran 1 – Création du ruleset `rule1`**  
+👉 ![Création du ruleset](cap1.png)
+
+- Un ruleset nommé `rule1` a été créé via le bouton **"New ruleset"** dans l'onglet `Rulesets`.
+- Ce ruleset regroupera l’ensemble des règles de protection applicables à une ou plusieurs branches.
+
+---
+
+### 🎯 Étape 2 : Ciblage de la branche `master`
+
+📸 **Capture d'écran 2 – Ciblage de la branche `master` dans les paramètres du ruleset**  
+👉 ![Ciblage de la branche master](cap2.png)
+
+- Dans la section **Targets**, la branche `master` a été spécifiée comme cible.
+- Cela signifie que toutes les règles définies s’appliqueront uniquement à cette branche.
+
+---
+
+### 🔐 Étape 3 : Activation des restrictions de merge
+
+📸 **Capture d'écran 3 – Activation de la protection via Pull Request obligatoire**  
+👉 ![Pull Request obligatoire](cap3.png)
+
+- L’option **"Require a pull request before merging"** a été cochée.
+- Cela **empêche tout push direct** sur `master` : les changements doivent passer par une **Pull Request**.
+- De plus, **au moins 1 approbation est exigée** pour fusionner la PR.
+
+---
+
+💬 **Commentaires :**
+
+- Cette configuration assure que **chaque contribution est relue et validée** avant d’être intégrée à la branche principale.
+- Cela permet de maintenir un code propre, sécurisé, et validé collectivement.
+- Utile dans tout workflow collaboratif en équipe.
+
   
-* **3.1 Création de branches thématiques :**
- 
-Pour organiser le développement collaboratif, plusieurs branches ont été créées, chacune associée à une fonctionnalité ou une correction spécifique :
- 
+
+## 3.2 Création et utilisation des branches thématiques
+
+Pour organiser le développement collaboratif, plusieurs branches ont été créées, chacune correspondant à une fonctionnalité ou une correction spécifique :
+
 - `feature/generate_dashboard`
-
 - `feature/new_graph`
-
+- `feature/new_model`
 - `bugfix/division-error`
- 
+
 La commande utilisée pour créer une branche thématique est :
- 
+
 ```bash
-git checkout -b feature/generate_dashboard
+git checkout -b feature/new_model
 ```
 
+📸 **Capture d'écran – Aller dans la branche feature/new_modeldéja créé"
+👉  
+![Switcher vers la branche](cap4.png)
 
-📸 **Capture d'écran 6 (Création d'une branche locale avec `git checkout -b`)**  
 
-👉 ![Création d'une branche locale avec git checkout -b](img/create-branch.png)
 
- 
-* **3.2 Développement et commits :**
- 
-Sur chaque branche, les modifications sont suivies de commits explicites, en utilisant une sémantique standard :
- 
+📸 **Capture d'écran – Ouverture du fichier `model1.py` dans VS Code**  
+👉  
+![Ouverture du fichier model1.py](cap5_prime.png)
+
+---
+
+## ➕ Étape 4– Ajout des modifications dans l’index Git
+
+### 💻 Commande utilisée :
 ```bash
-git commit -m "feat: ajout du dashboard interactif"
+git add app/src/model1.py
 ```
- 
-**Convention de nommage des messages de commit**
- 
-- `feat:` → ajout d'une nouvelle fonctionnalité
+📸 **Capture d'écran – Ajout du fichier modifié au staging area**  
+👉  
+![Ajout au staging area](cap5.png)
 
-- `fix:` → correction d’un bug
+---
 
-- `BREAKING CHANGE:` → changement majeur pouvant casser la compatibilité
+## 📝 Étape 5 – Commit avec un message sémantique
 
-- `perf:` → amélioration des performances sans changement fonctionnel
+### 💻 Commande utilisée :
+```bash
+git commit -m "feat: ajout d'un nouveau modele model1()"
+```
+📸 **Capture d'écran – Commit structuré avec `feat:`**  
+👉  
+![Commit structuré avec feat](cap5.png)
 
-📸 **Capture d'écran 7 (Commit structuré sur la branche `feature/new_graph`)**  
-👉 ![Commit structuré sur la branche feature/new_graph](img/feature-commit.png)
+---
 
-* **3.3 Pull Requests et Revue de code**
- 
-Une fois le développement terminé, une Pull Request (PR) est créée depuis GitHub pour proposer l’intégration des changements dans la branche `main`.
- 
-📸 **Capture d'écran 8 (Création d’une Pull Request sur GitHub)**  
+📸 **Capture d'écran – git pull — Synchroniser sa branche avec le dépôt distant**
+👉  
+![git pull](cap6.png)
 
-👉 ![Création d’une Pull Request sur GitHub](img/create-pull-request.png)
- 
-Les coéquipiers sont invités à commenter, relire, et approuver les modifications. En cas de conflit, GitHub alerte, et une résolution manuelle peut être nécessaire avant merge.
- 
-> **Commentaires :**
- 
-  - Le système de PR permet un contrôle qualité collaboratif avant d’intégrer une fonctionnalité.
 
-  - Chaque branche reste isolée, ce qui évite les effets de bord sur `main`.
- 
-📸 **Capture d'écran 9 (Discussion et validation d’une Pull Request)**  
 
-👉 ![Discussion et validation d’une Pull Request](img/validate-pr.png)
+## 🚀 Étape 6 – Envoi de la branche sur le dépôt distant
 
- 
+### 💻 Commande utilisée :
+```bash
+git push -u origin feature/new_model
+```
+📸 **Capture d'écran – Push de la branche vers GitHub**  
+👉  
+![Push branche vers GitHub](cap7.png)
+
+---
+
+## 🏷️ Convention de nommage des messages de commit
+
+| Préfixe         | Description                                                             |
+|------------------|-------------------------------------------------------------------------|
+| `feat:`          | ➕ Ajout d'une **nouvelle fonctionnalité**                              |
+| `fix:`           | 🐛 Correction d’un **bug**                                              |
+| `BREAKING CHANGE:` | 💥 Changement **majeur** cassant la compatibilité                   |
+| `perf:`          | 🚀 Amélioration des **performances** sans changement fonctionnel        |
+
+```bash
+git commit -m "fix: correction division par zéro dans la fonction main"
+```
+## 3.3 - Intégration via Pull Requests
+
+## 📌 Étapes de revue et fusion d'une Pull Request sur GitHub
+
+### 🟡 Étape 7 : Détection de changements sur la branche
+📸 **Capture d'écran 1 (Compare & pull request)**  
+👉 ![Compare & pull request](cap8.png)
+
+> GitHub détecte que la branche `feature/new_model` a des changements récents. Un bouton "Compare & pull request" est proposé pour initier une PR vers `main`.
+
+---
+
+### 📝 Étape 8 : Création de la Pull Request
+📸 **Capture d'écran 2 (Création de la PR et état initial)**  
+👉 ![Création PR](cap9.png)
+> L'auteur décrit les modifications apportées.  
+> Des checks automatiques sont en cours (CI Docker) et une revue humaine est requise.  
+> L’option "Merge pull request" est bloquée tant que ces conditions ne sont pas remplies.
+
+---
+
+### ✅ Étape 9 : Revue par un coéquipier
+📸 **Capture d'écran 3 (Review de la Pull Request)**  
+👉 ![Review PR](cap10.png)
+> Le coéquipier Tarek valide la PR avec un message d'approbation. Il peut cliquer sur "Approve" et soumettre la revue.
+
+---
+
+### ✅ Étape 10: Vérification automatique des checks
+📸 **Capture d'écran 4 (Checks et validation automatique)**  
+👉 ![Checks ok](cap11.png)
+👉 ![Checks ok](cap12.png)
+> Tous les tests sont passés (Docker CI), et il n’y a pas de conflits avec la branche principale.  
+> Le bouton "Merge pull request" devient actif.
+
+---
+
+### 🟢 Étape 11: Fusion et clôture
+📸 **Capture d'écran 5 (Fusion réussie)**  
+👉 ![PR fusionnée](cap13.png)
+> La PR est fusionnée avec succès dans la branche `main`. GitHub propose de supprimer la branche `feature/new_model` devenue obsolète.
+
+---
+
 ## Tâche 4 : Utilisation et gestion des tags Git
  
 ---
  
 * **4.1 Création de tags pour marquer les versions**
  
-Une fois une version stable atteinte (après l’intégration d’une fonctionnalité complète ou d’une correction importante), un **tag annoté** est créé pour figer cette version dans l’historique Git :
- 
+✅ **Étape 1 – Création d’un tag Git annoté**  
+Une fois que le modèle `model1()` a été intégré à la branche `master` (issue de la PR `feature/new_model`), un nouveau tag `v1.1.0` a été créé :
+
+### 💻 Commande utilisée :
 ```bash
-git tag -a v1.0.0 -m "Version 1.0.0 - Première release stable avec Dockerfile fonctionnel"
+git tag -a v1.1.0 -m "Version 1.1.0 - Deuxième version stable"
 ```
- 
-📸 **Capture d'écran 10 (Création d’un tag Git annoté)**  
+📸 **Capture d'écran 1 – Création du tag `v1.1.0`**  
+👉  
+![Création du tag v1.1.0](cap14.png)
 
-👉 ![Création d’un tag Git annoté](img/git-tag-create.png)
- 
-Puis, le tag est poussé sur le dépôt distant :
- 
+☁️ **Étape 2 – Push du tag sur GitHub**  
+Pour publier ce tag sur le dépôt distant et générer une nouvelle release GitHub :
+
+### 💻 Commande utilisée :
 ```bash
-git push origin --tags
+git push origin v1.1.0
 ```
- 
-📸 **Capture d'écran 11 (Push du tag vers GitHub)**  
+📸 **Capture d'écran 2 – Push du tag sur GitHub**  
+👉  
+![Push du tag v1.1.0 sur GitHub](cap15.png)
 
-👉 ![Push du tag vers GitHub](img/git-tag-push.png)
+🚀 **Étape 3 – Visualisation sur GitHub**  
+Le tag `v1.1.0` est désormais visible sur GitHub, avec les fichiers sources en pièce jointe :
 
- 
+📸 **Capture d'écran 3 – Release GitHub visible avec le tag `v1.1.0`**  
+👉  
+![Release GitHub tag v1.1.0](cap21.png)
+
+
+
+
+
 * **4.2 Vérification et listing des tags**
  
-Tous les tags créés peuvent être listés avec la commande :
- 
+🛠️ **Étape 4 – Vérification des tags existants**  
+Pour lister tous les tags disponibles dans le projet :
+
+### 💻 Commande utilisée :
 ```bash
 git tag -l
 ```
- 
-📸 **Capture d'écran 12 (Liste des tags disponibles)**  
 
-👉 ![Liste des tags disponibles](img/git-tag-list.png)
- 
-> **Commentaires :**
- 
-  - L'utilisation de tags permet de **marquer des versions stables** du projet.
+📸 **Capture d'écran 4 – Liste des tags Git**  
+👉  
+![Liste des tags Git](cap16.png)
 
-  - Cela facilite la navigation dans l’historique et permet de **lier une version à un livrable précis** (comme une image Docker).
+---
 
-  - Associé à GitHub Actions, un tag peut déclencher automatiquement un build.
+🔍 **Tags observés** :
 
- -----
+- `v0.1`, `v0.2`, `v0.3` – Développement initial  
+- `v1.0.0` – Première release stable  
+- `v1.1.0` – Nouvelle fonctionnalité : ajout du modèle `model1()`
+
+---
+
+🧠 **Remarque pédagogique : Pourquoi utiliser un tag ?**
+
+- ✅ Pour **marquer un point stable** dans l’évolution du projet.
+- 🚀 Pour **déclencher des workflows CI/CD** (ex. : publication Docker via GitHub Actions).
+- 📦 Pour **générer automatiquement une release GitHub** avec les fichiers sources (ZIP, TAR, etc.).
+
+📌 **Pourquoi version `1.1.0` ?**
+
+> On suit le **Semantic Versioning (SemVer)** :
+> - `1` → version majeure (changements cassants)
+> - `1` → version mineure (**ajout de fonctionnalité** sans rupture)
+> - `0` → patch (corrections de bugs ou petits ajustements)
+
+Ici, `model1()` est une **nouvelle fonctionnalité non cassante**, donc on incrémente la version **mineure**.
+
+
+
 
 * **4.3 Récupération et exécution d’une image Docker versionnée (via GHCR)**
  
-Une fois l’image poussée sur **GitHub Container Registry (GHCR)**, on peut la récupérer avec :
- 
+🚀 **Exécution de l’image Docker versionnée via GHCR**
+
+🔽 **Étape 1 – Pull de l’image `v1.1.0` depuis GHCR**
+
+### 💻 Commande utilisée :
 ```bash
-docker pull ghcr.io/<username>/<repo>:v1.0.0
+docker pull ghcr.io/ridaadar/newtp:v1.1.0
 ```
-Et l’exécuter en local :
- 
+
+📸 **Capture d'écran 5 – Téléchargement de l’image `v1.1.0` depuis GHCR**  
+👉  
+![Pull image v1.1.0](cap17.png)
+
+
+
+💬 **Commentaire** :  
+L’image versionnée `v1.1.0` est récupérée depuis **GitHub Container Registry (GHCR)**.  
+Elle contient l'application **Streamlit** avec les dernières fonctionnalités intégrées.
+
+---
+
+🖼️ **Étape 2 – Vérification des images disponibles**
+
+### 💻 Commande utilisée :
 ```bash
-docker run -p 8501:8501 ghcr.io/<username>/<repo>:v1.0.0
+docker images
 ```
- 📸 **Capture d'écran 13 (Pull et exécution de l’image Docker GHCR)**  
 
-👉 ![Pull et exécution de l’image Docker GHCR](img/docker-ghcr-run.png)
+📸 **Capture d'écran 6 – Liste des images Docker disponibles en local**  
+👉  
+![Liste des images Docker](cap18.png)
 
-  **Remarque :**
- 
-- GHCR facilite le **partage des images Docker versionnées**.
 
-- Couplé à **GitHub Actions**, ce mécanisme permet de **publier automatiquement une image Docker à chaque release** via un tag Git.
+💬 **Commentaire** :  
+Les deux versions `v1.0.0` et `v1.1.0` sont présentes localement.  
+Chaque image a une taille d’environ **1.35GB**, prêtes à être exécutées.
 
- 
->  **Tâche 4 complétée** : les tags Git sont créés, poussés et utilisés pour piloter la génération d’images Docker versionnées.
+---
+
+🧠 **Étape 3 – Exécution de l’image via `docker run`**
+
+### 💻 Commande utilisée :
+```bash
+docker run --name streamlit_app -p 8501:8501 ghcr.io/ridaadar/newtp:v1.1.0
+```
+
+📸 **Capture – Lancement du conteneur et logs de démarrage**  
+👉  
+![Logs de démarrage Streamlit](cap19.png)
+
+💬 **Commentaire** :  
+Le conteneur `streamlit_app` est lancé sur le port **8501**.  
+Les logs confirment le **chargement du dataset** et le démarrage de l’**analyse exploratoire (EDA)**.
+
+---
+
+🌐 **Étape 4 – Accès à l’application dans le navigateur**
+
+📸 **Capture – Interface web de l’application Streamlit (EDA)**  
+👉  
+![Interface Streamlit EDA](cap20.png)
+
+💬 **Commentaire** :  
+L’application est accessible via [http://127.0.0.1:8501](http://127.0.0.1:8501).  
+Elle propose :
+
+- 📊 Une vue générale du jeu de données,  
+- 📈 Des statistiques descriptives,  
+- 🤖 L'entraînement et les prédictions basées sur le modèle `model1()` intégré en `v1.1.0`.
+
+---
+
+✅ **Conclusion** :  
+Cette version `v1.1.0` de l'image Docker comprend le **nouveau modèle `model1()`** ajouté précédemment.  
+Elle a été **taguée** puis **poussée** sur **GitHub Container Registry (GHCR)**, puis **testée avec succès en local**.  
+Le tout est **validé** par l’affichage de l’interface complète de l’application Streamlit.
+
+
+
+
  
 ## Tâche 5 : Expérimentation avec des commandes Git avancées
  
@@ -266,21 +461,79 @@ git rebase -i HEAD~3
 
 * **5.2 Commande `cherry-pick`**
  
-Un commit utile d’une autre branche a été récupéré dans la branche courante grâce à :
- 
+## 🧪 Étape 1 – Création de commits sur une branche spécifique
+
+Deux commits ont été réalisés sur la branche `feature/new_model` :
+
+### 💻 Commandes utilisées :
 ```bash
-git cherry-pick <commit_hash>
+git commit -m "feat: Introduire le bug1"
+git commit -m "feat: creer le modele my_model()"
+```
+📸 **Capture 1 – Commit 1 : Introduire le bug1**  
+👉  
+![Commit Introduire le bug1](first-commit-before-cherry.png)
+
+📸 **Capture 2 – Commit 2 : Créer le modèle `my_model()`**  
+👉  
+![Commit my_model](second-commit-before-cherry.png)
+
+---
+
+🔍 **Étape 2 – Affichage de l’historique `git log` avant le `cherry-pick`**
+
+### 💻 Commande utilisée :
+```bash
+git log --oneline
 ```
 
-📸 **Capture d'écran 15 (Cherry-pick d’un correctif depuis une autre branche)**  
+📸 **Capture 3 – Historique de la branche `feature/new_model` avant `cherry-pick`**  
+👉  
+![Historique git log](git-log-2commits_before_cheery.png)
 
-👉 ![Cherry-pick d’un correctif depuis une autre branche](img/git-cherry-pick.png)
- 
-> **Cas d’usage :**
- 
-  - Un bug a été corrigé dans la branche `bugfix/typo`, mais cette correction est aussi nécessaire sur `feature/dashboard`.
+---
 
-  - Plutôt que de refaire le commit, on le **"rejoue"** grâce à `cherry-pick`.
+🍒 **Étape 3 – Cherry-pick du commit ciblé**  
+Pour rejouer **uniquement** le commit de création du modèle sur la branche `master`, on utilise :
+
+### 💻 Commande utilisée :
+```bash
+git cherry-pick 996ae0b
+```
+
+📸 **Capture 4 – Cherry-pick depuis `master`**  
+👉  
+![Cherry-pick depuis master](cherry1.png)
+
+✅ **Résultat** :  
+Le commit est copié dans la branche `master` avec un **nouvel identifiant** (SHA différent), mais **le même contenu** que sur `feature/new_model`.
+
+---
+
+🧾 **Étape 4 – Vérification avec `git log`**
+
+### 💻 Commande utilisée :
+```bash
+git log --oneline
+```
+
+📸 **Capture 5 – Log après cherry-pick sur `master`**  
+👉  
+
+![Log après cherry-pick sur master](git_log_after_cherry.png)
+
+---
+
+💬 **Commentaires** :  
+`git cherry-pick` permet d’intégrer un **commit précis** d’une autre branche dans l’historique actuel **sans faire de merge**.
+
+✅ Très utile pour :
+- **Récupérer un correctif** ou une **fonctionnalité isolée**,
+- **Éviter de polluer** `master` avec tout l’historique de la branche source,
+- **Garder un historique propre et ciblé** lors du travail multi-branches.
+
+🧠 Outil stratégique en environnement collaboratif pour un contrôle fin sur l'intégration du code.
+
 
 ---
  
