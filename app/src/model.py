@@ -10,6 +10,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
+# modele1
+def model1():
+    pass
+
+
 
 # modele 2
 def my_model():
