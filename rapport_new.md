@@ -9,7 +9,6 @@
   - ***Pierre Chrislin DORIVAL***
 
 # TP Git & Docker – Rapport
- 
 ### Enoncé :  
 
 
@@ -38,14 +37,41 @@ Le dépôt GitHub fourni (`docker_tp`) a été cloné en local à l’aide de la
 git clone https://github.com/RidaAdar/docker_tp.git
 ```
 
-![Clonage du dépôt Git depuis GitHub]()
+![Clonage du dépôt Git depuis GitHub](Images/capture-config_log.png)
+
+> Création d’un dépôt local et envoi vers le dépôt distant en les associant :
+
+
+```bash
+cd docker_tp
+# Se déplacer dans le dossier du projet
+
+git init
+# Initialise un dépôt Git local (le dossier devient un projet versionné)
+
+git add .
+# Ajoute tous les fichiers du dossier au suivi Git
+
+git commit -m "first commit"
+# Crée un premier commit avec un message
+
+git branch -M main
+# (Facultatif) Renomme la branche actuelle en 'main' pour suivre la convention GitHub
+
+git remote add origin https://github.com/TON-UTILISATEUR/ton-repo.git
+# Associe le dépôt local à un dépôt distant sur GitHub
+
+git push -u origin main
+# Envoie la branche 'main' sur GitHub et établit la liaison de suivi entre local et distant
+```
+
 
 * **1.2 Configuration de Git :**
  
 Avant toute manipulation, la configuration de l’environnement Git a été vérifiée et ajustée pour s'assurer que les informations de l'utilisateur sont bien définies.
  
 ```bash
-git config --global user.name "VotreNom"
+git config --global user.name "forbiddeone"
 git config --global user.email "votremail@example.com"
 ```
 Puis, la configuration a été vérifiée avec :
@@ -53,11 +79,12 @@ Puis, la configuration a été vérifiée avec :
 ```bash
 git config --list
 ```
+**Remarque :** Commande d'importation des photos dans le dossier Images
 
-📸 **Capture d'écran 2 (Affichage de la configuration Git)**  
-
-![Affichage de la configuration Git](git-config-list.png)
-
+```bash
+cp /mnt/c/Users/tarek/OneDrive/Images/Screenshots/Cpature_config.png /home/forbiddeone/newTP/Images
+``` 
+ ![Affichage de la configuration Git](Images/capture-config_log.png)
 
 * **1.3. Initialisation du nouveau dépôt distant**
 
@@ -65,10 +92,10 @@ Après avoir cloné le projet, un nouveau dépôt GitHub a été créé. Le lien
 
 ```bash
 git remote remove origin
-git remote add origin https://github.com/<username>/<new-repo>.git
+git remote add origin https://github.com/RidaAdar/newTP.git
 ```
-📸 **Capture d'écran 3 (Changement de dépôt distant avec `git remote`)**  
-👉 ![Changement de dépôt distant](git-remote.png)
+
+![Changement de dépôt distant](Images/capture_remote.png)
 
 ## Tâche 2 : Configuration avancée du fichier `.gitignore`
  
@@ -78,9 +105,64 @@ Un fichier `.gitignore` a été créé et configuré pour ignorer les fichiers e
  
 > Voici les principales entrées ajoutées :
 
+ ```gitignore
 
-📸 **Capture d'écran 4 (Édition du fichier .gitignore dans l'éditeur)**  
-👉 ![Édition du fichier .gitignore](screen-gitignore.png)
+ # Python bytecode
+ __pycache__/
+ *.py[cod]
+ *.pyo
+ 
+ # Fichiers de logs
+ *.log
+ 
+ # Fichiers temporaires
+ *.tmp
+ *.swp
+ 
+ # Dossiers de build
+ build/
+ dist/
+ 
+ # Caches
+ .cache/
+ *.egg-info/
+ .eggs/
+ pip-wheel-metadata/
+ 
+ # Environnements virtuels
+ .env
+ .venv/
+ venv/
+ env/
+ 
+ # Fichiers secrets
+ *.key
+ *.pem
+ 
+ # Docker
+ .docker/
+ docker-compose.override.yml
+ Dockerfile~
+ *.tar
+ *.tar.gz
+ 
+ # Streamlit
+ .streamlit/config.toml
+ 
+ # IDEs / éditeurs
+ .vscode/
+ .idea/
+ 
+ # Système (Windows / Mac)
+ .DS_Store
+ Thumbs.db
+ ```
+> Mise à jour du fichier .gitignore
+```bash
+nano .gitignore
+# ou
+code .gitignore
+```
 
 * **2.2 Vérification des fichiers ignorés :**
  
@@ -89,14 +171,14 @@ La commande suivante a été utilisée pour vérifier que les fichiers définis 
 ```bash
 git status
 ```
-📸 **Capture d'écran 5 (`git status` montrant que les fichiers sont ignorés)**  
-👉 ![git status montrant que les fichiers sont ignorés](git_status.png)
- 
-💬 **Commentaires :**
 
-- ✅ Les fichiers temporaires et d’environnement (`.log`, `.pyc`, `.venv/`, `build/`, etc.) sont bien ignorés grâce au `.gitignore`.
-- 🖼️ Les fichiers `.png` sont des **captures d’écran prévues pour le rapport** : ils ne sont pas ignorés et seront commités volontairement.
-- 📌 Le statut affiché est donc **normal et maîtrisé**.
+![git status montrant que les fichiers sont ignorés](Images/capture_status.png)
+ 
+ > **Commentaires :**
+ 
+   - Les fichiers comme `.log`, `.pyc`, ou les dossiers comme `.venv/`, `build/`, `.vscode/` sont correctement exclus.
+
+   - Cela permet de garder un historique propre et de ne pas polluer le dépôt avec des fichiers générés automatiquement.
 
  
 ## Tâche 3 : Mise en place d’un workflow de développement collaboratif
@@ -117,10 +199,7 @@ La commande utilisée pour créer une branche thématique est :
 git checkout -b feature/generate_dashboard
 ```
 
-
-📸 **Capture d'écran 6 (Création d'une branche locale avec `git checkout -b`)**  
-
-👉 ![Création d'une branche locale avec git checkout -b](img/create-branch.png)
+![Création d'une branche locale avec git checkout -b](Images/capture_chekout-branch.png)
 
  
 * **3.2 Développement et commits :**
@@ -142,7 +221,7 @@ git commit -m "feat: ajout du dashboard interactif"
 - `perf:` → amélioration des performances sans changement fonctionnel
 
 📸 **Capture d'écran 7 (Commit structuré sur la branche `feature/new_graph`)**  
-👉 ![Commit structuré sur la branche feature/new_graph](img/feature-commit.png)
+👉 ![Commit structuré sur la branche feature/new_graph](Images/capture_commit.png)
 
 * **3.3 Pull Requests et Revue de code**
  
@@ -150,7 +229,7 @@ Une fois le développement terminé, une Pull Request (PR) est créée depuis Gi
  
 📸 **Capture d'écran 8 (Création d’une Pull Request sur GitHub)**  
 
-👉 ![Création d’une Pull Request sur GitHub](img/create-pull-request.png)
+👉 ![Création d’une Pull Request sur GitHub](Images/capture_pullrequest.png)
  
 Les coéquipiers sont invités à commenter, relire, et approuver les modifications. En cas de conflit, GitHub alerte, et une résolution manuelle peut être nécessaire avant merge.
  
@@ -159,12 +238,9 @@ Les coéquipiers sont invités à commenter, relire, et approuver les modificati
   - Le système de PR permet un contrôle qualité collaboratif avant d’intégrer une fonctionnalité.
 
   - Chaque branche reste isolée, ce qui évite les effets de bord sur `main`.
- 
-📸 **Capture d'écran 9 (Discussion et validation d’une Pull Request)**  
+   
+![Discussion et validation d’une Pull Request](Images/capture_approve_pull.png)
 
-👉 ![Discussion et validation d’une Pull Request](img/validate-pr.png)
-
- 
 ## Tâche 4 : Utilisation et gestion des tags Git
  
 ---
@@ -176,22 +252,16 @@ Une fois une version stable atteinte (après l’intégration d’une fonctionna
 ```bash
 git tag -a v1.0.0 -m "Version 1.0.0 - Première release stable avec Dockerfile fonctionnel"
 ```
- 
-📸 **Capture d'écran 10 (Création d’un tag Git annoté)**  
-
-👉 ![Création d’un tag Git annoté](img/git-tag-create.png)
+![Création d’un tag Git annoté](Images/capture_tag.png)
  
 Puis, le tag est poussé sur le dépôt distant :
  
 ```bash
 git push origin --tags
 ```
- 
-📸 **Capture d'écran 11 (Push du tag vers GitHub)**  
+![Push du tag vers GitHub](Images/capture_pushtag.png)
 
-👉 ![Push du tag vers GitHub](img/git-tag-push.png)
 
- 
 * **4.2 Vérification et listing des tags**
  
 Tous les tags créés peuvent être listés avec la commande :
@@ -199,11 +269,7 @@ Tous les tags créés peuvent être listés avec la commande :
 ```bash
 git tag -l
 ```
- 
-📸 **Capture d'écran 12 (Liste des tags disponibles)**  
 
-👉 ![Liste des tags disponibles](img/git-tag-list.png)
- 
 > **Commentaires :**
  
   - L'utilisation de tags permet de **marquer des versions stables** du projet.
@@ -213,22 +279,24 @@ git tag -l
   - Associé à GitHub Actions, un tag peut déclencher automatiquement un build.
 
  -----
+ forbiddeone@Ltranger:~/newTP$ git reset --hard HEAD~1 
+HEAD is now at 90723ea  feat: Ajout new_model3
 
 * **4.3 Récupération et exécution d’une image Docker versionnée (via GHCR)**
  
 Une fois l’image poussée sur **GitHub Container Registry (GHCR)**, on peut la récupérer avec :
  
 ```bash
-docker pull ghcr.io/<username>/<repo>:v1.0.0
+ docker pull ghcr.io/ridaadar/newtp:sha-7b6a4ad
 ```
+![Pull et exécution de l’image Docker GHCR](Images/capture_buildim.png)
+
 Et l’exécuter en local :
  
 ```bash
-docker run -p 8501:8501 ghcr.io/<username>/<repo>:v1.0.0
+docker run -p 8502:8501 ghcr.io/ridaadar/newtp:sha-7b6a4ad
 ```
- 📸 **Capture d'écran 13 (Pull et exécution de l’image Docker GHCR)**  
-
-👉 ![Pull et exécution de l’image Docker GHCR](img/docker-ghcr-run.png)
+![Pull et exécution de l’image Docker GHCR](Images/capture_pull_image.png)
 
   **Remarque :**
  
@@ -238,7 +306,19 @@ docker run -p 8501:8501 ghcr.io/<username>/<repo>:v1.0.0
 
  
 >  **Tâche 4 complétée** : les tags Git sont créés, poussés et utilisés pour piloter la génération d’images Docker versionnées.
- 
+
+> Option 1: You want to keep those changes permanently
+```bash
+git add .
+git commit -m "save changes before rebase"
+git rebase -i HEAD~3
+```
+> You want to temporarily hide your changes (and bring them back later)
+```bash 
+git stash
+git rebase -i HEAD~3
+git stash pop  # bring your changes back after rebase
+```
 ## Tâche 5 : Expérimentation avec des commandes Git avancées
  
 ---
@@ -250,10 +330,7 @@ Sur une branche de fonctionnalité, un rebase interactif a été utilisé pour *
 ```bash
 git rebase -i HEAD~3
 ```
- 
-📸 **Capture d'écran 14 (Rebase interactif sur la branche `feature/clean-history`)**  
-
-👉 ![Rebase interactif sur la branche feature/clean-history](img/git-rebase-interactif.png)
+![Rebase interactif sur la branche feature/clean-history](Images/capture_chery_pick.png)
  
 > **Commentaires :**
  
@@ -269,12 +346,10 @@ git rebase -i HEAD~3
 Un commit utile d’une autre branche a été récupéré dans la branche courante grâce à :
  
 ```bash
-git cherry-pick <commit_hash>
+git cherry-pick 5ef497c
 ```
 
-📸 **Capture d'écran 15 (Cherry-pick d’un correctif depuis une autre branche)**  
-
-👉 ![Cherry-pick d’un correctif depuis une autre branche](img/git-cherry-pick.png)
+![Cherry-pick d’un correctif depuis une autre branche](Images/capture_log-list.png)
  
 > **Cas d’usage :**
  
@@ -296,10 +371,7 @@ Et plus tard réappliquées avec :
 ```bash
 git stash pop
 ```
- 
-📸 **Capture d'écran 16 (stash et récupération de modifications)**  
-
-👉 ![stash et récupération de modifications](img/git-stash.png)
+ ![stash et récupération de modifications](Images/capture_stash.png)
 
  
 * **5.4 Visualisation de l’historique des branches**
@@ -310,16 +382,13 @@ L’arborescence des commits et des branches a été visualisée avec :
 git log --graph --oneline --all
 ```
  
-📸 **Capture d'écran 17 (Historique visuel avec `git log --graph`)**  
 
-👉 ![Historique visuel avec git log --graph](img/git-graph-cli.png)
+![Historique visuel avec git log --graph](Images/capture_log-list.png)
  
  
 De plus, l’extension Git Graph de VS Code a été utilisée pour un affichage graphique :
  
-📸 **Capture d'écran 18 (Topologie des branches avec Git Graph VS Code)**  
-
-👉 ![Topologie des branches avec Git Graph VS Code](img/git-graph-vscode.png)
+![Topologie des branches avec Git Graph VS Code](img/git-graph-vscode.png)
 
  
  > **Commentaires :**
@@ -336,10 +405,7 @@ De plus, l’extension Git Graph de VS Code a été utilisée pour un affichage 
 * **8.1 Utilisation des Issues**
  
 Des **issues** ont été créées sur GitHub afin de décomposer les tâches à effectuer et **assigner les responsabilités** à chaque membre de l’équipe.
- 
-📸 **Capture d'écran 19 (Liste des issues créées sur GitHub)**  
-
-👉 ![Liste des issues créées sur GitHub](img/issues-list.png)
+ )
  
 > **Commentaires :**
  
@@ -355,9 +421,6 @@ Des **issues** ont été créées sur GitHub afin de décomposer les tâches à 
  
 Un **Project Board GitHub** (type Kanban) a été mis en place pour organiser le travail collaboratif.
  
-📸 **Capture d'écran 20 (Project Board avec colonnes Todo, In Progress, Done)**  
-
-👉 ![Project Board GitHub](img/project-board.png)
  
  > **Commentaires :**
  
@@ -378,7 +441,59 @@ Un **Project Board GitHub** (type Kanban) a été mis en place pour organiser le
 > **Tâche 8 complétée :**
  Les outils de suivi GitHub (Issues + Project Board) ont été utilisés efficacement pour structurer le travail d’équipe.
 
- 
+ ## 5. Questions théoriques supplémentaires
+
+---
+
+### 🔹 Rebase vs Merge
+
+- `git rebase` permet un historique **plus propre et linéaire**.
+- `git merge` garde l’historique réel et est **plus sûr en collaboration**.
+- **Quand utiliser `rebase` :**
+  - Pour organiser ses commits en local, avant de pousser.
+- **Quand utiliser `merge` :**
+  - Pour intégrer des branches sur un dépôt partagé.
+- **Risques avec `rebase` :**
+  - Perte de commits si utilisé après un push.
+- **Conseils :**
+  - Ne jamais rebaser une branche déjà partagée.
+  - Toujours tester ou stasher les changements avant un rebase.
+
+---
+
+### 🔹 Intérêt des tags & Semantic Versioning
+
+- Les **tags** servent à marquer des **versions importantes et stables**.
+- Ils facilitent :
+  - Les déploiements
+  - Le suivi de version
+  - Les retours à un état stable
+
+#### Semantic Versioning : `MAJOR.MINOR.PATCH`
+- `MAJOR` → changements incompatibles
+- `MINOR` → nouvelles fonctionnalités compatibles
+- `PATCH` → corrections de bugs mineures
+
+*Exemple :* `v2.1.3`
+
+---
+
+### 🔹 Mauvaise configuration du fichier `.gitignore`
+
+- Peut entraîner :
+  - L’ajout de fichiers inutiles (logs, binaires, caches…)
+  - L’exposition de données sensibles (`.env`, clés…)
+  - Un dépôt plus lourd et désorganisé
+
+#### Pour corriger :
+
+1. Modifier `.gitignore` pour y ajouter les fichiers à exclure
+2. Supprimer les fichiers déjà suivis :
+
+```bash
+git rm --cached nom_du_fichier
+git commit -m "Nettoyage fichiers ignorés"
+
 
  
  
